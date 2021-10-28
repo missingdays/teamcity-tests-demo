@@ -34,6 +34,7 @@ project {
     for ((configurationName, tests) in configurations) {
         buildType(
             object : BuildType({
+                id = RelativeId(configurationName.toId())
                 name = configurationName
 
                 vcs {
