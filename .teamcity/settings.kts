@@ -33,7 +33,7 @@ private val configurations = mapOf(
 project {
     for ((configurationName, tests) in configurations) {
         buildType(
-            object Build : BuildType({
+            object : BuildType({
                 name = configurationName
 
                 vcs {
@@ -51,8 +51,7 @@ project {
                     vcs {
                     }
                 }
-            })
-
+            }) {}
         )
     }
 }
