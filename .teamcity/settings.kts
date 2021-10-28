@@ -26,27 +26,33 @@ To debug in IntelliJ Idea, open the 'Maven Projects' tool window (View
 
 version = "2021.2"
 
+private val configurations = mapOf(
+    "1. Simple tests" to "simple,slow"
+)
+
 project {
+    for ((configurationName, tests) in configurations) {
+        buildType(
+            object Build : BuildType({
+                name = configurationName
 
-    buildType(Build)
+                vcs {
+                    root(DslContext.settingsRoot)
+                }
+
+                steps {
+                    maven {
+                        goals = "clean test"
+                        runnerArgs = "-Dtests=$tests"
+                    }
+                }
+
+                triggers {
+                    vcs {
+                    }
+                }
+            })
+
+        )
+    }
 }
-
-object Build : BuildType({
-    name = "Build"
-
-    vcs {
-        root(DslContext.settingsRoot)
-    }
-
-    steps {
-        maven {
-            goals = "clean test"
-            runnerArgs = "-Dtests=simple"
-        }
-    }
-
-    triggers {
-        vcs {
-        }
-    }
-})
