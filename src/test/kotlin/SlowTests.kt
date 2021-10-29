@@ -6,27 +6,30 @@ import kotlin.random.Random
 import kotlin.test.assertEquals
 
 class SlowTests {
+    private val testDuration = 15000L
+
     @Test
     @Tag("slow")
     fun `this is a slow test`() {
-        Thread.sleep(5000)
+        Thread.sleep(testDuration)
     }
 
     @Test
     @Tag("slow")
     fun `this is another slow test`() {
-        Thread.sleep(5000)
+        Thread.sleep(testDuration)
     }
 
     @Test
     @Tag("slow")
     fun `this is a slow test that fails`() {
-        Thread.sleep(5000)
+        Thread.sleep(testDuration)
+        assertEquals(2, 1)
     }
 
     @Test
     @Tag("slow")
     fun `and this is yet another slow test`() {
-        Thread.sleep(5000)
+        Thread.sleep(testDuration)
     }
 }
