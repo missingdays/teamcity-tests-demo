@@ -1,9 +1,12 @@
 import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
+import java.time.LocalDateTime
+import java.util.*
+import kotlin.random.Random
 import kotlin.test.assertEquals
 
 class FlakyTests {
-    private val random = Math.random() < 0.5
+    private val random = Random(Date().time).nextBoolean()
     @Test
     @Tag("flaky")
     fun `this is a flaky test`() {
