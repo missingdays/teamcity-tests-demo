@@ -27,8 +27,9 @@ To debug in IntelliJ Idea, open the 'Maven Projects' tool window (View
 version = "2021.2"
 
 private val configurations = mapOf(
-    "1. Simple tests" to "simple,slow",
-    "2. Flaky tests" to "flaky"
+    "1. Simple tests" to "simple",
+    "2. Flaky tests" to "flaky",
+    "3. Slow tests" to "slow"
 )
 
 project {

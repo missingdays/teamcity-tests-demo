@@ -16,7 +16,7 @@ class SimpleTests {
     }
 
     @Test
-    @Tag("slow")
+    @Tag("simple")
     fun `this is a slow test`() {
         Thread.sleep(3000)
     }
