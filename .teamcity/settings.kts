@@ -28,8 +28,8 @@ version = "2021.2"
 
 private val configurations = mapOf(
     "1. Simple tests" to "simple",
-    "2. Flaky tests" to "flaky",
-    "3. Slow tests" to "slow"
+    "2. Slow tests" to "slow",
+    "3. Flaky tests" to "flaky",
 )
 
 project {
