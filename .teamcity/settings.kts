@@ -1,8 +1,11 @@
 import jetbrains.buildServer.configs.kotlin.v2019_2.*
 import jetbrains.buildServer.configs.kotlin.v2019_2.buildFeatures.notifications
+import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.gradle
 import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.maven
 import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.script
+import jetbrains.buildServer.configs.kotlin.v2019_2.projectFeatures.versionedSettings
 import jetbrains.buildServer.configs.kotlin.v2019_2.triggers.vcs
+import jetbrains.buildServer.configs.kotlin.v2019_2.vcs.GitVcsRoot
 
 /*
 The settings script is an entry point for defining a TeamCity
@@ -38,7 +41,7 @@ private val configurations = mapOf(
 project {
     for ((configurationName, tests) in configurations) {
         buildType(
-            object : BuildType({
+            BuildType {
                 id = RelativeId(configurationName.toId())
                 name = configurationName
 
@@ -52,9 +55,54 @@ project {
                         runnerArgs = "-Dtests=$tests"
                     }
                 }
-            }) {}
+            }
         )
     }
+
+    project(
+        Project {
+            id("TestsMetadata")
+            name = "5. Tests Metadata"
+
+            features {
+                versionedSettings {
+                    id = "PROJECT_EXT_1"
+                }
+            }
+
+            vcsRoot(TestsMetadataVcsRoot)
+
+            buildType(
+                BuildType {
+                    id("TestsMetadata_TestMetadataDemo")
+                    name = "Run tests"
+
+                    artifactRules = "build/reports/tests/test => gradle_test_report.zip"
+
+                    params {
+                        param("teamcity.build.serviceMessages.logOriginal", "true")
+                    }
+
+                    vcs {
+                        root(TestsMetadataVcsRoot)
+                    }
+
+                    steps {
+                        gradle {
+                            tasks = "clean build"
+                            buildFile = ""
+                            gradleWrapperPath = ""
+                        }
+                    }
+
+                    triggers {
+                        vcs {
+                        }
+                    }
+                }
+            )
+        }
+    )
 
     buildType(ReportingYourOwnTests)
 }
@@ -73,5 +121,17 @@ object ReportingYourOwnTests : BuildType({
                 echo ##teamcity[testFinished name='myFailedTest']
             """.trimIndent()
         }
+    }
+})
+
+object TestsMetadataVcsRoot : GitVcsRoot({
+    id("TestsMetadata_GitGithubComJetBrainsTeamcityTestMetadataDemoGitRefsHeadsMaster")
+    name = "git@github.com:JetBrains/teamcity-test-metadata-demo.git#refs/heads/master"
+    url = "git@github.com:JetBrains/teamcity-test-metadata-demo.git"
+    branch = "refs/heads/master"
+    branchSpec = "refs/heads/*"
+    authMethod = uploadedKey {
+        userName = "git"
+        uploadedKey = "id_rsa"
     }
 })
