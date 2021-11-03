@@ -1,6 +1,6 @@
 package teamcity.demo
 
-class ClassToBeCoveredByTests {
+class ClassToBeCovered {
     fun method(flag: Boolean): Int {
         return if (flag) {
             10
@@ -12,6 +12,6 @@ class ClassToBeCoveredByTests {
     fun notCoveredMethod() {}
 }
 
-class ClassThatIsNotCoveredByTests {
+class ClassThatIsNotCovered {
     fun methodThatIsNotCovered() {}
 }
