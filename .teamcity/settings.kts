@@ -59,6 +59,7 @@ project {
                         runnerArgs = "-Dtests=$tests"
                         coverageEngine = idea {
                             includeClasses = "teamcity.demo.*"
+                            excludeClasses = "teamcity.demo.*Test*"
                         }
                     }
                 }
