@@ -13,7 +13,7 @@ in the project with id = 'TestsMetadata', and delete the patch script.
 */
 create(RelativeId("TestsMetadata"), BuildType({
     id("TestsMetadata_TestMetadataDemo")
-    name = "5. Test metadata demo"
+    name = "Run tests"
 
     artifactRules = "build/reports/tests/test => gradle_test_report.zip"
 
