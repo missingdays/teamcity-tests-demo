@@ -12,6 +12,3 @@ class ClassToBeCovered {
     fun notCoveredMethod() {}
 }
 
-class ClassThatIsNotCovered {
-    fun methodThatIsNotCovered() {}
-}
