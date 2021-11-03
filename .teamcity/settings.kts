@@ -1,5 +1,7 @@
 import jetbrains.buildServer.configs.kotlin.v2019_2.*
+import jetbrains.buildServer.configs.kotlin.v2019_2.buildFeatures.notifications
 import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.maven
+import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.script
 import jetbrains.buildServer.configs.kotlin.v2019_2.triggers.vcs
 
 /*
@@ -53,4 +55,23 @@ project {
             }) {}
         )
     }
+
+    buildType(ReportingYourOwnTests)
 }
+
+object ReportingYourOwnTests : BuildType({
+    name = "6. Reporting your own tests"
+
+    steps {
+        script {
+            scriptContent = """
+                echo ##teamcity[testStarted name='myCustomTest']
+                echo ##teamcity[testFinished name='myCustomTest' duration='1337']
+                
+                echo ##teamcity[testStarted name='myFailedTest']
+                echo ##teamcity[testFailed name='myFailedTest' message='this test failed because it was destined to fail']
+                echo ##teamcity[testFinished name='myFailedTest']
+            """.trimIndent()
+        }
+    }
+})
