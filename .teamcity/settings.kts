@@ -30,6 +30,7 @@ private val configurations = mapOf(
     "1. Simple tests" to "simple",
     "2. Slow tests" to "slow",
     "3. Flaky tests" to "flaky",
+    "4. Investigations" to "simple",
 )
 
 project {
