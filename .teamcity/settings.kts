@@ -96,7 +96,7 @@ object TestsMetadataVcsRoot : GitVcsRoot({
 
 object TestsMetadataConfiguration : BuildType({
     id("RunTests")
-    name = "Run tests"
+    name = "5. Tests metadata"
 
     artifactRules = "build/reports/tests/test => gradle_test_report.zip"
 
