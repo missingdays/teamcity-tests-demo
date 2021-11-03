@@ -39,6 +39,8 @@ private val configurations = mapOf(
 )
 
 project {
+    vcsRoot(TestsMetadataVcsRoot)
+
     for ((configurationName, tests) in configurations) {
         buildType(
             BuildType {
@@ -59,7 +61,7 @@ project {
         )
     }
 
-    subProject(TestsMetadataProject)
+    buildType(TestsMetadataConfiguration)
     buildType(ReportingYourOwnTests)
 }
 
@@ -92,36 +94,30 @@ object TestsMetadataVcsRoot : GitVcsRoot({
     }
 })
 
-object TestsMetadataProject : Project({
-    name = "5. Tests Metadata"
+object TestsMetadataConfiguration : BuildType({
+    id("RunTests")
+    name = "Run tests"
 
-    vcsRoot(TestsMetadataVcsRoot)
+    artifactRules = "build/reports/tests/test => gradle_test_report.zip"
 
-    buildType(BuildType {
-        id("RunTests")
-        name = "Run tests"
+    params {
+        param("teamcity.build.serviceMessages.logOriginal", "true")
+    }
 
-        artifactRules = "build/reports/tests/test => gradle_test_report.zip"
+    vcs {
+        root(TestsMetadataVcsRoot)
+    }
 
-        params {
-            param("teamcity.build.serviceMessages.logOriginal", "true")
+    steps {
+        gradle {
+            tasks = "clean build"
+            buildFile = ""
+            gradleWrapperPath = ""
         }
+    }
 
+    triggers {
         vcs {
-            root(TestsMetadataVcsRoot)
         }
-
-        steps {
-            gradle {
-                tasks = "clean build"
-                buildFile = ""
-                gradleWrapperPath = ""
-            }
-        }
-
-        triggers {
-            vcs {
-            }
-        }
-    })
+    }
 })
