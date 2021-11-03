@@ -64,12 +64,6 @@ project {
             id("TestsMetadata")
             name = "5. Tests Metadata"
 
-            features {
-                versionedSettings {
-                    id = "PROJECT_EXT_1"
-                }
-            }
-
             vcsRoot(TestsMetadataVcsRoot)
 
             buildType(
