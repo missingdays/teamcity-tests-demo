@@ -69,7 +69,7 @@ object ReportingYourOwnTests : BuildType({
                 echo ##teamcity[testFinished name='myCustomTest' duration='1337']
                 
                 echo ##teamcity[testStarted name='myFailedTest']
-                echo ##teamcity[testFailed name='myFailedTest' message='this test failed because it was destined to fail']
+                echo ##teamcity[testFailed name='myFailedTest' message='The number must be 20000' details='junit.framework.AssertionFailedError: expected:<20000> but was:<10000>|n|r    at junit.framework.Assert.fail(Assert.java:47)|n|r    at junit.framework.Assert.failNotEquals(Assert.java:280)|n|r...']
                 echo ##teamcity[testFinished name='myFailedTest']
             """.trimIndent()
         }
