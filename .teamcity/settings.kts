@@ -61,14 +61,12 @@ project {
 
     project(
         Project {
-            id = RelativeId("TestsMetadata")
             name = "5. Tests Metadata"
 
             vcsRoot(TestsMetadataVcsRoot)
 
             buildType(
                 BuildType {
-                    id = RelativeId("TestsMetadata_TestMetadataDemo")
                     name = "Run tests"
 
                     artifactRules = "build/reports/tests/test => gradle_test_report.zip"
