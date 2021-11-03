@@ -59,7 +59,7 @@ project {
         )
     }
 
-    project(TestsMetadataProject)
+    subProject(TestsMetadataProject)
     buildType(ReportingYourOwnTests)
 }
 
