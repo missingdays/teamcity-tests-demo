@@ -98,6 +98,7 @@ object TestsMetadataProject : Project({
     vcsRoot(TestsMetadataVcsRoot)
 
     buildType(BuildType {
+        id("RunTests")
         name = "Run tests"
 
         artifactRules = "build/reports/tests/test => gradle_test_report.zip"
