@@ -50,11 +50,6 @@ project {
                         runnerArgs = "-Dtests=$tests"
                     }
                 }
-
-                triggers {
-                    vcs {
-                    }
-                }
             }) {}
         )
     }
