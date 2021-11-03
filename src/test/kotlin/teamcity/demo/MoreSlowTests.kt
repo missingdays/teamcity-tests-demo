@@ -31,6 +31,12 @@ class MoreSlowTests {
 
     @Test
     @Tag("slow")
+    fun `this is a slow test that executed random amount of time`() {
+        Thread.sleep(testDuration * (Math.random() + 0.1).toLong())
+    }
+
+    @Test
+    @Tag("slow")
     fun `and this is yet another slow test`() {
         Thread.sleep(testDuration)
     }
