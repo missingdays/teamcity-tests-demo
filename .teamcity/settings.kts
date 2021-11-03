@@ -1,5 +1,6 @@
 import jetbrains.buildServer.configs.kotlin.v2019_2.*
 import jetbrains.buildServer.configs.kotlin.v2019_2.buildFeatures.notifications
+import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.MavenBuildStep
 import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.gradle
 import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.maven
 import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.script
@@ -56,6 +57,7 @@ project {
                     maven {
                         goals = "clean test"
                         runnerArgs = "-Dtests=$tests"
+                        coverageEngine = MavenBuildStep.CoverageEngine.Idea()
                     }
                 }
             }
