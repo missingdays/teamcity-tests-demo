@@ -1,3 +1,5 @@
+package teamcity.demo
+
 class ClassToBeCoveredByTests {
     fun method(flag: Boolean): Int {
         return if (flag) {

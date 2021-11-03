@@ -57,7 +57,9 @@ project {
                     maven {
                         goals = "clean test"
                         runnerArgs = "-Dtests=$tests"
-                        coverageEngine = MavenBuildStep.CoverageEngine.Idea()
+                        coverageEngine = idea {
+                            includeClasses = "teamcity.demo.*"
+                        }
                     }
                 }
             }
