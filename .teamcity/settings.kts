@@ -59,43 +59,7 @@ project {
         )
     }
 
-    project(
-        Project {
-            name = "5. Tests Metadata"
-
-            vcsRoot(TestsMetadataVcsRoot)
-
-            buildType(
-                BuildType {
-                    name = "Run tests"
-
-                    artifactRules = "build/reports/tests/test => gradle_test_report.zip"
-
-                    params {
-                        param("teamcity.build.serviceMessages.logOriginal", "true")
-                    }
-
-                    vcs {
-                        root(TestsMetadataVcsRoot)
-                    }
-
-                    steps {
-                        gradle {
-                            tasks = "clean build"
-                            buildFile = ""
-                            gradleWrapperPath = ""
-                        }
-                    }
-
-                    triggers {
-                        vcs {
-                        }
-                    }
-                }
-            )
-        }
-    )
-
+    project(TestsMetadataProject)
     buildType(ReportingYourOwnTests)
 }
 
@@ -126,4 +90,37 @@ object TestsMetadataVcsRoot : GitVcsRoot({
         userName = "git"
         uploadedKey = "id_rsa"
     }
+})
+
+object TestsMetadataProject : Project({
+    name = "5. Tests Metadata"
+
+    vcsRoot(TestsMetadataVcsRoot)
+
+    buildType(BuildType {
+        name = "Run tests"
+
+        artifactRules = "build/reports/tests/test => gradle_test_report.zip"
+
+        params {
+            param("teamcity.build.serviceMessages.logOriginal", "true")
+        }
+
+        vcs {
+            root(TestsMetadataVcsRoot)
+        }
+
+        steps {
+            gradle {
+                tasks = "clean build"
+                buildFile = ""
+                gradleWrapperPath = ""
+            }
+        }
+
+        triggers {
+            vcs {
+            }
+        }
+    })
 })
