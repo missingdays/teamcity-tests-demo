@@ -2,6 +2,7 @@ package patches.projects
 
 import jetbrains.buildServer.configs.kotlin.v2019_2.*
 import jetbrains.buildServer.configs.kotlin.v2019_2.Project
+import jetbrains.buildServer.configs.kotlin.v2019_2.projectFeatures.versionedSettings
 import jetbrains.buildServer.configs.kotlin.v2019_2.ui.*
 
 /*
@@ -11,6 +12,12 @@ in the root project, and delete the patch script.
 */
 create(DslContext.projectId, Project({
     id("TestsMetadata")
-    name = "Tests Metadata"
+    name = "5. Tests Metadata"
+
+    features {
+        versionedSettings {
+            id = "PROJECT_EXT_1"
+        }
+    }
 }))
 
