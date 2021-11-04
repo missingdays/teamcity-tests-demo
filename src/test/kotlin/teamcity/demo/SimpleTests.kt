@@ -14,7 +14,7 @@ class SimpleTests {
     @Test
     @Tag("simple")
     fun `this is a failing test`() {
-        assertEquals(1, 2)
+        assertEquals(2, 2)
     }
 
     @Test
