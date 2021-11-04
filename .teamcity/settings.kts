@@ -4,8 +4,11 @@ import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.MavenBuildStep
 import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.gradle
 import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.maven
 import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.script
+import jetbrains.buildServer.configs.kotlin.v2019_2.failureConditions.BuildFailureOnMetric
+import jetbrains.buildServer.configs.kotlin.v2019_2.failureConditions.failOnMetricChange
 import jetbrains.buildServer.configs.kotlin.v2019_2.projectFeatures.versionedSettings
 import jetbrains.buildServer.configs.kotlin.v2019_2.triggers.vcs
+import jetbrains.buildServer.configs.kotlin.v2019_2.ui.add
 import jetbrains.buildServer.configs.kotlin.v2019_2.vcs.GitVcsRoot
 
 /*
@@ -51,6 +54,18 @@ project {
 
                 vcs {
                     root(DslContext.settingsRoot)
+                }
+
+                if ("coverage" in tests) {
+                    failureConditions {
+                        failOnMetricChange {
+                            metric = BuildFailureOnMetric.MetricType.COVERAGE_LINE_PERCENTAGE
+                            threshold = 100
+                            units = BuildFailureOnMetric.MetricUnit.DEFAULT_UNIT
+                            comparison = BuildFailureOnMetric.MetricComparison.LESS
+                            compareTo = value()
+                        }
+                    }
                 }
 
                 steps {
