@@ -9,6 +9,8 @@ class ClassToBeCovered {
         }
     }
 
-    fun notCoveredMethod() {}
+    fun notCoveredMethod() {
+        println("hello")
+    }
 }
 
