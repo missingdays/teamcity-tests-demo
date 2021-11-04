@@ -12,7 +12,6 @@ class TestsCoverage {
         t.method(false)
     }
 
-    /*
     @Test
     @Tag("coverage")
     fun `test that fully covers all the classes`() {
@@ -20,5 +19,4 @@ class TestsCoverage {
         t.notCoveredMethod()
         ClassThatIsNotCovered().methodThatIsNotCovered()
     }
-     */
 }
