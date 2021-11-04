@@ -15,6 +15,7 @@ changeBuildType(RelativeId("id7Coverage")) {
         add {
             failOnMetricChange {
                 metric = BuildFailureOnMetric.MetricType.COVERAGE_LINE_PERCENTAGE
+                threshold = 100
                 units = BuildFailureOnMetric.MetricUnit.DEFAULT_UNIT
                 comparison = BuildFailureOnMetric.MetricComparison.LESS
                 compareTo = value()
